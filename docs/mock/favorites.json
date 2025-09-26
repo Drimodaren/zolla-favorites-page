@@ -9,7 +9,7 @@
       "discount": 15,
       "rating": 4.6,
       "reviewsCount": 52,
-      "image": "../../assets/images/red-dress.png",
+      "image": "/zolla-favorites-page/assets/images/red-dress.png",
       "inStock": true,
             "sizes": [
                 { "value": "XS", "available": true },
@@ -28,7 +28,7 @@
       "discount": 44,
       "rating": 4.8,
       "reviewsCount": 40,
-      "image": "../../assets/images/purple-dress.png",
+      "image": "/zolla-favorites-page/assets/images/purple-dress.png",
       "inStock": true,
             "sizes": [
                 { "value": "XS", "available": false },
@@ -46,7 +46,7 @@
       "discount": 20,
       "rating": 4.4,
       "reviewsCount": 25,
-      "image": "../../assets/images/brown-bag.jpg",
+      "image": "/zolla-favorites-page/assets/images/brown-bag.jpg",
       "inStock": true,
             "sizes": [
                 { "value": "One size", "available": true }
@@ -62,7 +62,7 @@
       "discount": 15,
       "rating": 4.7,
       "reviewsCount": 32,
-      "image": "../../assets/images/white-dress.png",
+      "image": "/zolla-favorites-page/assets/images/white-dress.png",
       "inStock": false,
             "sizes": [
                 { "value": "XS", "available": false },
@@ -80,7 +80,7 @@
       "discount": 15,
       "rating": 4.5,
       "reviewsCount": 30,
-      "image": "../../assets/images/green-dress.png",
+      "image": "/zolla-favorites-page/assets/images/green-dress.png",
       "inStock": true,
             "sizes": [
                 { "value": "S", "available": true },

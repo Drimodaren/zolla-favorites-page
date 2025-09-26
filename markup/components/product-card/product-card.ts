@@ -134,7 +134,7 @@ const renderColorDot = (product: Product): string => {
 
 const renderRemoveButton = (productId: number): string => `
   <button type="button" class="btn-remove" aria-label="Удалить из избранного" data-gtm="remove-favorite" data-product-id="${productId}">
-    <img src="../../assets/images/trash.svg" alt="Удалить из избранного" />
+    <img src="/zolla-favorites-page/assets/images/trash.svg" alt="Удалить из избранного" />
   </button>
 `;
 

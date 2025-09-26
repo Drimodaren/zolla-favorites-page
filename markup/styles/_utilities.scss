@@ -1,0 +1,128 @@
+$color-primary: #000;
+$color-primary-hover: #262626;
+$color-secondary: #757575;
+$color-accent: #d10a10;
+$color-light: #f8f8f8;
+$color-border: #e5e5e5;
+$color-white: #fff;
+$breakpoint-sm: 576px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 992px;
+$breakpoint-xl: 1200px;
+$breakpoint-xxl: 1400px;
+
+@mixin focus-visible {
+  &:focus-visible {
+    outline: 2px solid $color-accent;
+    outline-offset: 2px;
+  }
+}
+
+@mixin sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+@mixin text-truncate($lines: 1) {
+  @if $lines == 1 {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  } @else {
+    display: -webkit-box;
+    -webkit-line-clamp: $lines;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}
+
+@mixin transition($property: all, $duration: 0.3s, $timing: ease) {
+  transition: $property $duration $timing;
+}
+
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@mixin grid-cards($min-width: 270px, $gap: 1rem) {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax($min-width, 1fr));
+  gap: $gap;
+}
+
+@mixin btn-base {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1rem;
+  border-radius: 0;
+  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
+  font-weight: 500;
+
+  @include transition;
+  @include focus-visible;
+}
+
+@mixin rating-stars($size: 1rem) {
+  .rating {
+    display: inline-flex;
+    align-items: center;
+
+    .stars {
+      display: inline-flex;
+
+      .star {
+        width: $size;
+        height: $size;
+        margin-right: 0.25rem;
+
+        &.full {
+          color: #ffc107;
+        }
+
+        &.half {
+          position: relative;
+          color: #e5e5e5;
+
+          &::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 50%;
+            height: 100%;
+            background-color: #ffc107;
+            overflow: hidden;
+          }
+        }
+
+        &.empty {
+          color: #e5e5e5;
+        }
+      }
+    }
+
+    .rating-value {
+      margin-left: 0.5rem;
+      font-size: 0.85em;
+      color: $color-secondary;
+    }
+  }
+}

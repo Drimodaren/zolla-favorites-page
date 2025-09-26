@@ -1,0 +1,223 @@
+@import '../../styles/utilities';
+
+.subscribe-modal,
+.success-modal {
+  .modal-content {
+    border-radius: 0;
+    border: none;
+  }
+
+  .modal-header {
+    border-bottom: 1px solid $color-border;
+    padding: 1.5rem;
+
+    .modal-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+    }
+
+    .btn-close {
+      padding: 1rem;
+      margin: -1rem;
+      opacity: 1;
+
+      &:focus {
+        box-shadow: none;
+        outline: 2px solid $color-primary;
+        outline-offset: 1px;
+      }
+    }
+  }
+
+  .modal-body {
+    padding: 1.5rem;
+
+    .product-info {
+      display: flex;
+      align-items: center;
+      margin-bottom: 1.5rem;
+
+      .product-image {
+        width: 80px;
+        height: 100px;
+        object-fit: cover;
+        margin-right: 1rem;
+      }
+
+      .product-details {
+        flex: 1;
+
+        .product-brand {
+          font-size: 0.875rem;
+          color: $color-secondary;
+          margin-bottom: 0.25rem;
+        }
+
+        .product-title {
+          font-size: 1rem;
+          font-weight: 500;
+          margin-bottom: 0.5rem;
+        }
+
+        .product-price {
+          font-weight: 600;
+        }
+      }
+    }
+
+    .form-group {
+      margin-bottom: 1.25rem;
+
+      label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-size: 0.875rem;
+        font-weight: 500;
+      }
+
+      .form-control {
+        border-radius: 0;
+        border-color: $color-border;
+        padding: 0.75rem;
+
+        &:focus {
+          box-shadow: none;
+          border-color: $color-primary;
+        }
+      }
+
+      .form-select {
+        border-radius: 0;
+        border-color: $color-border;
+        padding: 0.75rem;
+
+        &:focus {
+          box-shadow: none;
+          border-color: $color-primary;
+        }
+      }
+
+      .form-text {
+        margin-top: 0.5rem;
+        font-size: 0.75rem;
+        color: $color-secondary;
+      }
+
+      .invalid-feedback {
+        font-size: 0.75rem;
+        color: $color-accent;
+        display: none;
+
+        &.show {
+          display: block;
+        }
+      }
+    }
+
+    .form-check {
+      margin-bottom: 1.5rem;
+      padding-left: 1.75rem;
+
+      .form-check-input {
+        width: 1.25rem;
+        height: 1.25rem;
+        margin-left: -1.75rem;
+        border-radius: 0;
+        border-color: $color-border;
+
+        &:checked {
+          background-color: $color-primary;
+          border-color: $color-primary;
+        }
+
+        &:focus {
+          box-shadow: none;
+          border-color: $color-primary;
+        }
+      }
+
+      .form-check-label {
+        font-size: 0.875rem;
+        color: $color-secondary;
+
+        a {
+          color: $color-primary;
+          text-decoration: none;
+
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
+    }
+  }
+
+  .modal-footer {
+    padding: 1.5rem;
+    border-top: 1px solid $color-border;
+
+    .btn {
+      padding: 0.75rem 1.5rem;
+      border-radius: 0;
+      font-weight: 500;
+
+      &.btn-primary {
+        background-color: $color-primary;
+        border-color: $color-primary;
+
+        &:hover {
+          background-color: $color-primary-hover;
+          border-color: $color-primary-hover;
+        }
+
+        &:disabled {
+          background-color: $color-secondary;
+          border-color: $color-secondary;
+          opacity: 0.7;
+        }
+      }
+
+      &.btn-outline-secondary {
+        background-color: $color-white;
+        border-color: $color-border;
+        color: $color-secondary;
+
+        &:hover {
+          background-color: $color-light;
+          border-color: $color-border;
+          color: $color-primary;
+        }
+      }
+
+      @include focus-visible;
+    }
+  }
+}
+
+.success-modal {
+  .modal-body {
+    padding: 2rem;
+
+    .success-icon {
+      color: $color-accent;
+      margin: 0 auto;
+      width: 64px;
+      height: 64px;
+    }
+
+    h5 {
+      font-weight: 600;
+      font-size: 1.25rem;
+    }
+
+    p {
+      color: $color-secondary;
+      margin-bottom: 2rem;
+    }
+
+    .btn-primary {
+      padding: 0.75rem 1.5rem;
+      min-width: 240px;
+    }
+  }
+}

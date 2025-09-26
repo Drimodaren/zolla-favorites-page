@@ -1,0 +1,9 @@
+module.exports = {
+  extends: ['stylelint-config-standard-scss'],
+  rules: {
+    'selector-class-pattern': null,
+    'no-descending-specificity': null,
+    'selector-id-pattern': null,
+    'selector-no-vendor-prefix': null,
+  },
+};

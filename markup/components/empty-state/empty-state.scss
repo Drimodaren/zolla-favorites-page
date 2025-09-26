@@ -1,0 +1,59 @@
+@import '../../styles/utilities';
+
+.empty-state {
+  text-align: center;
+  padding: 4rem 1rem;
+  max-width: 600px;
+  margin: 0 auto;
+
+  .empty-state-icon {
+    margin-bottom: 2rem;
+
+    svg {
+      width: 80px;
+      height: 80px;
+      color: $color-secondary;
+    }
+  }
+
+  .empty-state-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    color: $color-primary;
+  }
+
+  .empty-state-description {
+    font-size: 1rem;
+    color: $color-secondary;
+    margin-bottom: 2rem;
+  }
+
+  .btn-primary {
+    background-color: $color-primary;
+    border-color: $color-primary;
+    padding: 0.75rem 2rem;
+    border-radius: 0;
+    font-weight: 500;
+
+    &:hover {
+      background-color: $color-primary-hover;
+      border-color: $color-primary-hover;
+    }
+
+    @include focus-visible;
+  }
+
+  @media (max-width: $breakpoint-md) {
+    padding: 3rem 1rem;
+
+    .empty-state-icon svg {
+      width: 60px;
+      height: 60px;
+    }
+
+    .empty-state-title {
+      font-size: 1.25rem;
+    }
+  }
+}

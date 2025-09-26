@@ -1,0 +1,44 @@
+{
+  "name": "zolla-favorites-page",
+  "version": "1.0.0",
+  "description": "Страница 'Избранное' для интернет-магазина Zolla",
+  "main": "index.js",
+  "scripts": {
+    "build": "gulp build",
+    "dev": "gulp dev",
+    "watch": "gulp watch",
+    "clean": "gulp clean",
+    "lint:js": "eslint --ext .ts markup/",
+    "lint:css": "stylelint \"markup/**/*.scss\"",
+    "prepare:gh-pages": "node scripts/prepare-gh-pages.js",
+    "deploy": "npm run build && npm run prepare:gh-pages",
+    "format": "prettier --write \"markup/**/*.{ts,scss,html}\"",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bootstrap": "^5.3.0",
+    "jquery": "^3.6.0"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^8.44.1",
+    "@typescript-eslint/parser": "^8.44.1",
+    "autoprefixer": "^10.4.14",
+    "browser-sync": "^2.29.1",
+    "cssnano": "^6.0.0",
+    "del": "^6.0.0",
+    "eslint": "^8.38.0",
+    "gulp": "^4.0.2",
+    "gulp-postcss": "^9.0.1",
+    "gulp-sass": "^5.1.0",
+    "prettier": "^2.8.7",
+    "sass": "^1.62.0",
+    "stylelint": "^15.4.0",
+    "stylelint-config-standard-scss": "^8.0.0",
+    "ts-loader": "^9.4.2",
+    "typescript": "^5.0.4",
+    "webpack": "^5.80.0",
+    "webpack-stream": "^7.0.0"
+  }
+}

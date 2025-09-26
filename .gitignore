@@ -1,0 +1,52 @@
+# Зависимости
+/node_modules
+/npm-debug.log
+/yarn-error.log
+/package-lock.json
+/yarn.lock
+
+# Директории сборки
+/dist
+/build
+
+# Файлы окружения
+/.env
+/.env.local
+/.env.development.local
+/.env.test.local
+/.env.production.local
+
+# Файлы редактора
+/.idea
+/.vscode
+*.sublime-project
+*.sublime-workspace
+.DS_Store
+
+# Временные файлы
+/.tmp
+/temp
+
+# Логи
+/logs
+*.log
+
+# Файлы покрытия кода тестами
+/coverage
+
+# Дампы сборки
+*.tgz
+*.zip
+*.tar.gz
+
+# Специфичные для macOS файлы
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Специфичные для Windows файлы
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/

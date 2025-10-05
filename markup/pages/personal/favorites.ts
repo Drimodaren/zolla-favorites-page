@@ -66,6 +66,14 @@ class FavoritesManager {
       this.handleOpenSubscribeModal(e as JQuery.ClickEvent)
     );
     $('#submitSubscribe').on('click', () => this.handleSubmitSubscribe());
+
+    $('.favorites-back').on('click', () => {
+      if (window.history.length > 1) {
+        window.history.back();
+      } else {
+        window.location.assign('/');
+      }
+    });
   }
 
   private renderFavoritesPage(): void {

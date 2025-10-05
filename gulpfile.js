@@ -98,6 +98,7 @@ function serve() {
       baseDir: './dist',
       index: 'index.html'
     },
+    startPath: '/pages/personal/favorites.html',
     port: 3000,
     open: true,
     notify: false

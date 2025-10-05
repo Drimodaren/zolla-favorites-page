@@ -11,12 +11,24 @@
       "reviewsCount": 52,
       "image": "../../assets/images/red-dress.png",
       "inStock": true,
-            "sizes": [
-                { "value": "XS", "available": true },
-                { "value": "S", "available": true },
-                { "value": "M", "available": false },
-                { "value": "L", "available": true }
-            ],
+      "sizes": [
+        {
+          "value": "XS",
+          "available": true
+        },
+        {
+          "value": "S",
+          "available": true
+        },
+        {
+          "value": "M",
+          "available": false
+        },
+        {
+          "value": "L",
+          "available": true
+        }
+      ],
       "colorHex": "#c94c57"
     },
     {
@@ -30,11 +42,20 @@
       "reviewsCount": 40,
       "image": "../../assets/images/purple-dress.png",
       "inStock": true,
-            "sizes": [
-                { "value": "XS", "available": false },
-                { "value": "S", "available": true },
-                { "value": "M", "available": true }
-            ],
+      "sizes": [
+        {
+          "value": "XS",
+          "available": false
+        },
+        {
+          "value": "S",
+          "available": true
+        },
+        {
+          "value": "M",
+          "available": true
+        }
+      ],
       "colorHex": "#7d57a4"
     },
     {
@@ -48,9 +69,12 @@
       "reviewsCount": 25,
       "image": "../../assets/images/brown-bag.jpg",
       "inStock": true,
-            "sizes": [
-                { "value": "One size", "available": true }
-            ],
+      "sizes": [
+        {
+          "value": "One size",
+          "available": true
+        }
+      ],
       "colorHex": "#cc7a45"
     },
     {
@@ -64,11 +88,20 @@
       "reviewsCount": 32,
       "image": "../../assets/images/white-dress.png",
       "inStock": false,
-            "sizes": [
-                { "value": "XS", "available": false },
-                { "value": "S", "available": false },
-                { "value": "M", "available": false }
-            ],
+      "sizes": [
+        {
+          "value": "XS",
+          "available": false
+        },
+        {
+          "value": "S",
+          "available": false
+        },
+        {
+          "value": "M",
+          "available": false
+        }
+      ],
       "colorHex": "#f1ede5"
     },
     {
@@ -82,11 +115,20 @@
       "reviewsCount": 30,
       "image": "../../assets/images/green-dress.png",
       "inStock": true,
-            "sizes": [
-                { "value": "S", "available": true },
-                { "value": "M", "available": true },
-                { "value": "L", "available": true }
-            ],
+      "sizes": [
+        {
+          "value": "S",
+          "available": true
+        },
+        {
+          "value": "M",
+          "available": true
+        },
+        {
+          "value": "L",
+          "available": true
+        }
+      ],
       "colorHex": "#6dbf7c"
     }
   ]

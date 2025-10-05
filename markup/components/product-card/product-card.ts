@@ -23,18 +23,19 @@ const renderRating = (productId: number, rating: number, reviewsCount?: number):
   const halfStar = rating % 1 >= 0.5;
   const emptyStars = 5 - fullStars - (halfStar ? 1 : 0);
   const starPath =
-    'M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z';
+    "M6.09194 0.968665C6.44936 0.193793 7.55064 0.193793 7.90806 0.968665L9.02264 3.38508C9.16831 3.70089 9.4676 3.91833 9.81296 3.95928L12.4555 4.2726C13.3029 4.37307 13.6432 5.42046 13.0167 5.99983L11.063 7.80658C10.8077 8.0427 10.6934 8.39454 10.7611 8.73565L11.2798 11.3457C11.4461 12.1827 10.5551 12.83 9.8105 12.4132L7.48844 11.1134C7.18497 10.9435 6.81503 10.9435 6.51156 11.1134L4.1895 12.4132C3.44489 12.83 2.55393 12.1827 2.72024 11.3457L3.23885 8.73565C3.30663 8.39454 3.19232 8.0427 2.93698 7.80658L0.983254 5.99983C0.356754 5.42046 0.697071 4.37307 1.54446 4.2726L4.18704 3.95928C4.5324 3.91833 4.83169 3.70089 4.97736 3.38508L6.09194 0.968665Z";
+
   const createStarSvg = (fill: string): string => `
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14 13" aria-hidden="true"  >
         <path d="${starPath}" fill="${fill}" />
       </svg>
     `;
 
   const createHalfStarSvg = (gradientId: string): string => `
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14 13" aria-hidden="true">
         <defs>
           <linearGradient id="${gradientId}" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="50%" stop-color="#FDB022" />
+            <stop offset="50%" stop-color="#FFB170" />
             <stop offset="50%" stop-color="#E0E4EF" />
             <stop offset="100%" stop-color="#E0E4EF" />
           </linearGradient>
@@ -58,7 +59,7 @@ const renderRating = (productId: number, rating: number, reviewsCount?: number):
     .map((type, index) => {
       if (type === 'full') {
         return `<span class="star star--full" aria-hidden="true">${createStarSvg(
-          '#FDB022'
+          '#FFB170'
         )}</span>`;
       }
 
@@ -132,9 +133,11 @@ const renderColorDot = (product: Product): string => {
   return `<div class="color-dot" style="background-color: ${product.colorHex};" aria-label="Цвет товара"></div>`;
 };
 
+const TRASH_ICON_SRC = '../../assets/images/trash.svg';
+
 const renderRemoveButton = (productId: number): string => `
   <button type="button" class="btn-remove" aria-label="Удалить из избранного" data-gtm="remove-favorite" data-product-id="${productId}">
-    <img src="/zolla-favorites-page/assets/images/trash.svg" alt="Удалить из избранного" />
+    <img src="${TRASH_ICON_SRC}" alt="Удалить из избранного" />
   </button>
 `;
 
@@ -151,13 +154,15 @@ const renderCardBody = (product: Product): string => {
 
   return `
     <div class="card-body">
-      <div class="card-price-row">
-        ${renderPriceBlock(product)}
-        ${renderRemoveButton(product.id)}
-      </div>
-      <h3 class="card-title">${product.title}</h3>
+      <div class="card-price-name-color">
+        <div class="card-price-row">
+          ${renderPriceBlock(product)}
+          ${renderRemoveButton(product.id)}
+        </div>
+        <h3 class="card-title">${product.title}</h3>
       ${renderColorDot(product)}
       <div class="card-rating">${ratingHtml}</div>
+      </div>
       ${renderSizeSelect(product.id, product.sizes, product.inStock)}
       <div class="card-buttons">
         ${renderActionButton(product)}
@@ -173,7 +178,6 @@ export const renderProductCard = (product: Product): string => {
     <div class="${cardClasses}" data-product-id="${product.id}">
       <div class="card-img-container">
         <img src="${product.image}" class="card-img-top" alt="${product.title}" loading="lazy">
-        ${product.discount ? `<div class="discount-badge">-${product.discount}%</div>` : ''}
       </div>
       ${renderCardBody(product)}
     </div>

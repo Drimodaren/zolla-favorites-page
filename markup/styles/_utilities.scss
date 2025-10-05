@@ -30,6 +30,10 @@ $breakpoint-xxl: 1400px;
   border-width: 0;
 }
 
+.visually-hidden {
+  @include sr-only;
+}
+
 @mixin text-truncate($lines: 1) {
   @if $lines == 1 {
     white-space: nowrap;

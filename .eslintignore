@@ -1,0 +1,6 @@
+*.json
+markup/mock/**/*.json
+*.html
+markup/**/*.html
+*.scss
+markup/**/*.scss

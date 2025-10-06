@@ -1,3 +1,16 @@
+try {
+  const { structuredClone } = require('node:util');
+  if (structuredClone && typeof global.structuredClone !== 'function') {
+    global.structuredClone = structuredClone;
+  }
+} catch (error) {
+  // util.structuredClone not available, fall back below
+}
+
+if (typeof global.structuredClone !== 'function') {
+  global.structuredClone = require('@ungap/structured-clone');
+}
+
 module.exports = {
   root: true,
   parser: '@typescript-eslint/parser',
@@ -5,6 +18,7 @@ module.exports = {
   extends: [
     'eslint:recommended',
     'plugin:@typescript-eslint/recommended',
+    'plugin:prettier/recommended',
   ],
   env: {
     browser: true,

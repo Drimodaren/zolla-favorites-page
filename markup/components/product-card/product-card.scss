@@ -1,9 +1,11 @@
-@import '../../styles/utilities';
+@use '../../styles/utilities' as *;
 
 .product-card {
   position: relative;
   z-index: 1;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
   margin-left: 12px;
   margin-bottom: 64px;
   max-width: 266px;
@@ -18,7 +20,7 @@
 
   .card-img-container {
     position: relative;
-    background-color: #f8f8f8;
+    background-color: $color-neutral-100;
     overflow: hidden;
     width: 100%;
     aspect-ratio: 266 / 351;
@@ -34,7 +36,6 @@
     &:hover .card-img-top {
       transform: scale(1.05);
     }
-
   }
 
   .card-body {
@@ -73,7 +74,6 @@
             transform: scale(1.05);
           }
 
-
           @include focus-visible;
         }
       }
@@ -84,7 +84,7 @@
       font-size: 13px;
       font-weight: 400;
       line-height: 20px;
-      color: #8c8c8c;
+      color: $color-neutral-600;
       text-overflow: ellipsis;
       white-space: nowrap;
       overflow: hidden;
@@ -98,7 +98,7 @@
       width: 16px;
       height: 16px;
       border-radius: 50%;
-      border: 1px solid rgb(0 0 0 / 8%);
+      border: 1px solid rgba($color-primary, 0.08);
     }
 
     .card-rating {
@@ -152,20 +152,20 @@
         font-size: 12px;
         line-height: 16px;
         font-weight: 600;
-        color: #ff4338;
+        color: $color-accent-heart;
       }
 
       &__old {
         font-size: 12px;
         line-height: 16px;
-        color: #000;
+        color: $color-primary;
         text-decoration: line-through;
         text-decoration-color: red;
       }
 
       &__discount {
         margin-left: auto;
-        color: #000;
+        color: $color-primary;
         font-size: 12px;
         line-height: 16px;
         font-weight: 400;
@@ -183,15 +183,18 @@
         left: 12px;
         top: 50%;
         transform: translateY(-50%);
-        color: #8c8c8c;
+        color: $color-neutral-600;
         font-size: 13px;
         line-height: 20px;
         font-weight: 400;
-        background-color: #fff;
+        background-color: $color-white;
         pointer-events: none;
         z-index: 2;
         opacity: 0;
-        transition: top 0.2s ease, transform 0.2s ease, opacity 0.2s ease;
+        transition:
+          top 0.2s ease,
+          transform 0.2s ease,
+          opacity 0.2s ease;
       }
 
       .form-select-dropdown {
@@ -203,16 +206,19 @@
         width: 100%;
         min-height: 48px;
         border-radius: 4px;
-        border: 1px solid #d9d9d9;
-        padding: 14px 12px;
+        border: 1px solid $color-neutral-400;
+        padding: $space-3-5 $space-3;
         font-size: 13px;
         line-height: 20px;
-        color: #8c8c8c;
-        background-color: #fff;
+        color: $color-neutral-600;
+        background-color: $color-white;
         display: flex;
         align-items: center;
         justify-content: space-between;
-        transition: border-color 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+        transition:
+          border-color 0.2s ease,
+          background-color 0.2s ease,
+          color 0.2s ease;
         position: relative;
         background-image: none;
 
@@ -220,7 +226,7 @@
           content: '';
           width: 10px;
           height: 10px;
-          border: solid currentColor;
+          border: solid currentcolor;
           border-width: 0 1px 1px 0;
           transform: rotate(45deg);
           transition: transform 0.2s ease;
@@ -241,37 +247,40 @@
 
         &:focus-visible,
         &.btn-dropdown--filled:focus-visible {
-          border-color: #bfbfbf;
+          border-color: $color-neutral-450;
           box-shadow: 0 0 0 2px rgb(0 0 0 / 5%);
           outline: none;
         }
 
         &:disabled {
-          background-color: #f1f2f6;
-          border-color: #e0e0e0;
-          color: #b3b3b3;
+          background-color: $color-neutral-200;
+          border-color: $color-neutral-350;
+          color: $color-neutral-500;
           cursor: not-allowed;
 
           &::after {
-            border-color: currentColor;
+            border-color: currentcolor;
           }
         }
 
         &.is-invalid {
           border-color: $color-accent;
-          box-shadow: 0 0 0 2px rgba(209, 10, 16, 0.25);
+          box-shadow: 0 0 0 2px rgb(209 10 16 / 25%);
         }
       }
 
       .btn-dropdown--filled {
-        color: #222;
+        color: $color-neutral-800;
       }
 
       .form-select__placeholder {
         flex: 1;
         text-align: left;
-        transition: transform 0.2s ease, font-size 0.2s ease, color 0.2s ease;
-        color: #8c8c8c;
+        transition:
+          transform 0.2s ease,
+          font-size 0.2s ease,
+          color 0.2s ease;
+        color: $color-neutral-600;
       }
 
       .dropdown-menu {
@@ -280,7 +289,7 @@
         padding: 0;
         margin-top: 0.5rem;
         border-radius: 8px;
-        border: 1px solid #d9d9d9;
+        border: 1px solid $color-neutral-400;
         box-shadow: 0 12px 32px rgb(15 23 42 / 12%);
         max-height: 220px;
         overflow-y: auto;
@@ -294,16 +303,16 @@
 
         &:hover,
         &:focus {
-          background-color: rgb(0 0 0 / 6%);
+          background-color: rgba($color-primary, 0.06);
         }
 
         &.active {
-          background-color: rgb(0 0 0 / 8%);
+          background-color: rgba($color-primary, 0.08);
         }
 
         &--unavailable,
         &.disabled {
-          color: #b3b3b3;
+          color: $color-neutral-500;
           pointer-events: none;
         }
       }
@@ -314,11 +323,11 @@
           transform: translateY(0);
           opacity: 1;
           font-size: 10px;
-          color: #8c8c8c;
+          color: $color-neutral-600;
         }
 
         .btn-dropdown {
-          color: #222;
+          color: $color-neutral-800;
           padding-top: 22px;
           padding-bottom: 6px;
         }
@@ -326,7 +335,7 @@
         .form-select__placeholder {
           transform: translateY(2px);
           font-size: 14px;
-          color: #222;
+          color: $color-neutral-800;
         }
       }
     }
@@ -346,36 +355,47 @@
         text-transform: uppercase;
         letter-spacing: 2px;
         text-align: center;
-        transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease,
+        transition:
+          background-color 0.2s ease,
+          color 0.2s ease,
+          border-color 0.2s ease,
           box-shadow 0.2s ease;
 
         &.btn-primary {
-          background-color: #fff;
-          border-color: #d9d9d9;
-          color: #8c8c8c;
+          background-color: $color-white;
+          border-color: $color-neutral-400;
+          color: $color-neutral-600;
 
           &:hover {
-            background-color: #f6f6f6;
-            border-color: #bfbfbf;
+            background-color: $color-neutral-180;
+            border-color: $color-neutral-450;
           }
 
           &:disabled {
             background-color: $color-light;
             border-color: $color-border;
-            color: #b3b3b3;
+            color: $color-neutral-500;
             opacity: 1;
           }
         }
 
         &.btn-outline-primary {
-          background-color: #fff;
-          border-color: #d9d9d9;
-          color: #8c8c8c;
+          background-color: $color-white;
+          border-color: $color-neutral-400;
+          color: $color-neutral-600;
 
           &:hover {
-            background-color: #f6f6f6;
-            border-color: #bfbfbf;
-            color: #8c8c8c;
+            background-color: $color-neutral-180;
+            border-color: $color-neutral-450;
+            color: $color-neutral-600;
+          }
+
+          &:disabled {
+            background-color: $color-white;
+            border-color: $color-neutral-350;
+            color: $color-neutral-500;
+            opacity: 1;
+            cursor: default;
           }
         }
 
@@ -398,7 +418,7 @@
 .product-card.card {
   border: none;
   border-radius: 24px;
-  background-color: #fff;
+  background-color: $color-white;
   box-shadow: none;
 }
 
@@ -412,7 +432,6 @@
     margin-bottom: 40px;
     width: 186px;
 
-
     .card-body {
       .card-title {
         width: 170px;
@@ -425,8 +444,8 @@
         font-size: 10px;
         padding: 0;
         margin: 0 12px;
-        color: #000000;
-        border: 1px solid #000000;
+        color: $color-primary;
+        border: 1px solid $color-primary;
       }
 
       .btn-favorite {
@@ -438,7 +457,7 @@
         transition: transform 0.2s ease;
         top: 3.5px;
         right: 2px;
-        color: #ff4338;
+        color: $color-accent-heart;
 
         svg {
           width: 24px;
@@ -459,7 +478,6 @@
   .btn-remove {
     display: none;
   }
-
 
   .size-select {
     display: none;

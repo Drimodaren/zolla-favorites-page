@@ -18,11 +18,7 @@ export interface Product {
   colorHex?: string;
 }
 
-const renderRating = (
-  productId: number,
-  rating?: number | null,
-  reviewsCount?: number
-): string => {
+const renderRating = (productId: number, rating?: number | null, reviewsCount?: number): string => {
   const safeRating = typeof rating === 'number' ? rating : null;
 
   if (safeRating === null || Number.isNaN(safeRating) || safeRating <= 0) {
@@ -33,7 +29,7 @@ const renderRating = (
   const halfStar = safeRating % 1 >= 0.5;
   const emptyStars = 5 - fullStars - (halfStar ? 1 : 0);
   const starPath =
-    "M6.09194 0.968665C6.44936 0.193793 7.55064 0.193793 7.90806 0.968665L9.02264 3.38508C9.16831 3.70089 9.4676 3.91833 9.81296 3.95928L12.4555 4.2726C13.3029 4.37307 13.6432 5.42046 13.0167 5.99983L11.063 7.80658C10.8077 8.0427 10.6934 8.39454 10.7611 8.73565L11.2798 11.3457C11.4461 12.1827 10.5551 12.83 9.8105 12.4132L7.48844 11.1134C7.18497 10.9435 6.81503 10.9435 6.51156 11.1134L4.1895 12.4132C3.44489 12.83 2.55393 12.1827 2.72024 11.3457L3.23885 8.73565C3.30663 8.39454 3.19232 8.0427 2.93698 7.80658L0.983254 5.99983C0.356754 5.42046 0.697071 4.37307 1.54446 4.2726L4.18704 3.95928C4.5324 3.91833 4.83169 3.70089 4.97736 3.38508L6.09194 0.968665Z";
+    'M6.09194 0.968665C6.44936 0.193793 7.55064 0.193793 7.90806 0.968665L9.02264 3.38508C9.16831 3.70089 9.4676 3.91833 9.81296 3.95928L12.4555 4.2726C13.3029 4.37307 13.6432 5.42046 13.0167 5.99983L11.063 7.80658C10.8077 8.0427 10.6934 8.39454 10.7611 8.73565L11.2798 11.3457C11.4461 12.1827 10.5551 12.83 9.8105 12.4132L7.48844 11.1134C7.18497 10.9435 6.81503 10.9435 6.51156 11.1134L4.1895 12.4132C3.44489 12.83 2.55393 12.1827 2.72024 11.3457L3.23885 8.73565C3.30663 8.39454 3.19232 8.0427 2.93698 7.80658L0.983254 5.99983C0.356754 5.42046 0.697071 4.37307 1.54446 4.2726L4.18704 3.95928C4.5324 3.91833 4.83169 3.70089 4.97736 3.38508L6.09194 0.968665Z';
 
   const createStarSvg = (fill: string): string => `
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14 13" aria-hidden="true"  >
@@ -125,7 +121,7 @@ const renderSizeSelect = (productId: number, sizes: ProductSize[], inStock: bool
         `class="${classes.join(' ')}"`,
         `data-value="${size.value}"`,
         `data-available="${size.available}"`,
-        !size.available ? 'tabindex="-1" aria-disabled="true" disabled' : 'aria-disabled="false"'
+        !size.available ? 'tabindex="-1" aria-disabled="true" disabled' : 'aria-disabled="false"',
       ].join(' ');
 
       return `<li><button ${attributes}>${size.value}${availabilityLabel}</button></li>`;
@@ -207,7 +203,7 @@ const renderActionButton = (product: Product): string => {
     return `<button type="button" class="btn btn-primary" data-gtm="add-to-cart" data-product-id="${product.id}">В корзину</button>`;
   }
 
-  return `<button type="button" class="btn btn-outline-primary" data-gtm="subscribe" data-product-id="${product.id}" data-bs-toggle="modal" data-bs-target="#subscribeModal">Подписаться</button>`;
+  return `<button type="button" class="btn btn-outline-primary" data-gtm="subscribe" data-product-id="${product.id}" disabled>Нет в наличии</button>`;
 };
 
 const renderCardBody = (product: Product): string => {

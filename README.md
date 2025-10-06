@@ -40,7 +40,6 @@ markup/
   components/
     product-card/
     empty-state/
-    subscribe-modal/
   styles/_utilities.scss
   mock/favorites.json
   assets/images/

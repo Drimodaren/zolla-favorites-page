@@ -1,4 +1,3 @@
-
 interface JQuery<TElement = HTMLElement> {
   html(html: string): JQuery<TElement>;
   clone(): JQuery<TElement>;
@@ -8,25 +7,31 @@ interface JQuery<TElement = HTMLElement> {
   attr(attributeName: string): string;
   append(content: JQuery<HTMLElement> | string): JQuery<TElement>;
   prepend(content: JQuery<HTMLElement> | string): JQuery<TElement>;
-  on(eventType: string, handler: (event: Event) => void): JQuery<TElement>;
-  on(eventType: string, selector: string, handler: (event: Event) => void): JQuery<TElement>;
-  off(eventType: string, handler?: (event: Event) => void): JQuery<TElement>;
+  on(eventType: string, handler: (event: JQuery.Event) => void): JQuery<TElement>;
+  on(eventType: string, selector: string, handler: (event: JQuery.Event) => void): JQuery<TElement>;
+  off(eventType: string, handler?: (event: JQuery.Event) => void): JQuery<TElement>;
+  filter(selector: string | ((index: number, element: TElement) => boolean)): JQuery<TElement>;
+  toArray(): TElement[];
   val(): string | undefined;
   val(value: string | number | string[]): JQuery<TElement>;
+  trigger(eventType: string, extraParameters?: unknown): JQuery<TElement>;
+  trigger(event: JQuery.Event): JQuery<TElement>;
+  get(index: number): TElement | undefined;
   text(): string;
   text(text: string | number): JQuery<TElement>;
   prop(propertyName: string): string | number | boolean | undefined;
   prop(propertyName: string, value: string | number | boolean): JQuery<TElement>;
-  data(key: string): string | number | object | undefined;
+  data(key: string): string | number | Record<string, unknown> | undefined;
   find(selector: string): JQuery<TElement>;
   closest(selector: string): JQuery<TElement>;
   fadeOut(duration: number, complete?: () => void): JQuery<TElement>;
   animate(properties: object, duration?: number): JQuery<TElement>;
-  offset(): { top: number, left: number };
+  offset(): { top: number; left: number };
   remove(): JQuery<TElement>;
   each(callback: (index: number, element: TElement) => void): JQuery<TElement>;
   empty(): JQuery<TElement>;
   ready(handler: () => void): JQuery<TElement>;
+  [index: number]: TElement;
 }
 
 interface JQueryStatic {
@@ -34,7 +39,7 @@ interface JQueryStatic {
   (readyCallback: () => void): JQuery<HTMLElement>;
   (element: HTMLElement): JQuery<HTMLElement>;
   (elementArray: HTMLElement[]): JQuery<HTMLElement>;
-  (object: object): JQuery<HTMLElement>;
+  (object: Record<string, unknown>): JQuery<HTMLElement>;
   (html: string, ownerDocument?: Document): JQuery<HTMLElement>;
   <T>(collection: T[]): JQuery<HTMLElement>;
   getJSON<T>(url: string): JQuery.jqXHR<T>;
@@ -46,11 +51,26 @@ namespace JQuery {
     change: ChangeEvent<TDelegateTarget, TData, TCurrentTarget, TTarget>;
   }
 
-  type ClickEvent<TDelegateTarget = any, TData = any, TCurrentTarget = any, TTarget = any> = Event<TDelegateTarget, TData, TCurrentTarget, TTarget>
+  type ClickEvent<
+    TDelegateTarget = HTMLElement,
+    TData = undefined,
+    TCurrentTarget = HTMLElement,
+    TTarget = HTMLElement,
+  > = Event<TDelegateTarget, TData, TCurrentTarget, TTarget>;
 
-  type ChangeEvent<TDelegateTarget = any, TData = any, TCurrentTarget = any, TTarget = any> = Event<TDelegateTarget, TData, TCurrentTarget, TTarget>
+  type ChangeEvent<
+    TDelegateTarget = HTMLElement,
+    TData = undefined,
+    TCurrentTarget = HTMLElement,
+    TTarget = HTMLElement,
+  > = Event<TDelegateTarget, TData, TCurrentTarget, TTarget>;
 
-  interface Event<TDelegateTarget = any, TData = any, TCurrentTarget = any, TTarget = any> {
+  interface Event<
+    TDelegateTarget = HTMLElement,
+    TData = undefined,
+    TCurrentTarget = HTMLElement,
+    TTarget = HTMLElement,
+  > {
     currentTarget: TCurrentTarget;
     data: TData;
     delegateTarget: TDelegateTarget;
@@ -64,7 +84,7 @@ namespace JQuery {
 
   interface jqXHR<T> extends Promise<T> {
     done(callback: (data: T) => void): JQuery.jqXHR<T>;
-    fail(callback: (error: any) => void): JQuery.jqXHR<T>;
+    fail(callback: (error: unknown) => void): JQuery.jqXHR<T>;
   }
 }
 

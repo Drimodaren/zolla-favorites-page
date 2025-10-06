@@ -5,6 +5,34 @@ $color-accent: #d10a10;
 $color-light: #f8f8f8;
 $color-border: #e5e5e5;
 $color-white: #fff;
+
+// Neutral palette
+$color-neutral-800: #222;
+$color-neutral-700: #4a4a4a;
+$color-neutral-600: #8c8c8c;
+$color-neutral-500: #b3b3b3;
+$color-neutral-450: #bfbfbf;
+$color-neutral-400: #d9d9d9;
+$color-neutral-350: #e0e0e0;
+$color-neutral-200: #f1f2f6;
+$color-neutral-180: #f6f6f6;
+$color-neutral-150: #f3f3f3;
+$color-neutral-100: #f8f8f8;
+
+// Accent helpers
+$color-accent-heart: #ff4338;
+$color-accent-rating: #ffc107;
+$color-accent-rating-muted: #e5e5e5;
+
+// Spacing scale
+$space-1: 4px;
+$space-2: 8px;
+$space-3: 12px;
+$space-3-5: 14px;
+$space-4: 16px;
+$space-5: 20px;
+$space-6: 24px;
+$space-7: 32px;
 $breakpoint-sm: 576px;
 $breakpoint-md: 768px;
 $breakpoint-lg: 992px;
@@ -98,12 +126,12 @@ $breakpoint-xxl: 1400px;
         margin-right: 0.25rem;
 
         &.full {
-          color: #ffc107;
+          color: $color-accent-rating;
         }
 
         &.half {
           position: relative;
-          color: #e5e5e5;
+          color: $color-accent-rating-muted;
 
           &::before {
             content: '';
@@ -112,13 +140,13 @@ $breakpoint-xxl: 1400px;
             left: 0;
             width: 50%;
             height: 100%;
-            background-color: #ffc107;
+            background-color: $color-accent-rating;
             overflow: hidden;
           }
         }
 
         &.empty {
-          color: #e5e5e5;
+          color: $color-accent-rating-muted;
         }
       }
     }

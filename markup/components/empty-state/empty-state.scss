@@ -1,4 +1,4 @@
-@import '../../styles/utilities';
+@use '../../styles/utilities' as *;
 
 .empty-state {
   text-align: center;

@@ -6,21 +6,18 @@ import {
   markSizeSelectInvalid,
   updateSizeSelectState,
 } from '../../components/product-card/size-select';
+import { FavoritesService } from '../../services/favorites-service';
+import { SizeValidator } from '../../utils/size-validator';
+import { DOMUtils, ErrorHandler } from '../../utils/dom-utils';
+import { SELECTORS, TIMING_CONFIG } from '../../constants/ui-config';
 import 'bootstrap';
-
-interface FavoritesData {
-  items: Product[];
-}
-
-const fetchFavorites = (url: string) => $.getJSON<FavoritesData>(url);
 
 class FavoritesManager {
   private products: Product[] = [];
   private $favoritesContent: JQuery;
 
   constructor() {
-    this.$favoritesContent = $('#favoritesContent');
-
+    this.$favoritesContent = $(SELECTORS.FAVORITES_CONTENT);
     this.init();
   }
 
@@ -30,30 +27,23 @@ class FavoritesManager {
     this.bindEvents();
   }
 
-  private loadFavorites(): void {
-    const body = document.querySelector('body');
-    const dataUrl = body?.getAttribute('data-favorites-src') ?? 'mock/favorites.json';
-
-    fetchFavorites(dataUrl)
-      .done(data => {
-        this.products = data.items;
-        const totalFavorites = data.items.length;
-        $('#favoritesCount').text(totalFavorites.toString());
-
-        this.renderFavoritesPage();
-      })
-      .fail(() => {
-        console.error('Ошибка при загрузке данных избранных товаров');
-        this.$favoritesContent.html(`
-          <div class="alert alert-danger" role="alert">
-            Произошла ошибка при загрузке избранных товаров. Пожалуйста, попробуйте обновить страницу.
-          </div>
-        `);
-      });
+  private async loadFavorites(): Promise<void> {
+    try {
+      const data = await FavoritesService.fetchFavorites();
+      this.products = data.items;
+      DOMUtils.updateCounter(SELECTORS.FAVORITES_COUNT, data.items.length);
+      this.renderFavoritesPage();
+    } catch (error) {
+      ErrorHandler.logError('Ошибка при загрузке данных избранных товаров', error as Error);
+      ErrorHandler.showErrorMessage(
+        SELECTORS.FAVORITES_CONTENT,
+        'Произошла ошибка при загрузке избранных товаров. Пожалуйста, попробуйте обновить страницу.'
+      );
+    }
   }
 
   private bindEvents(): void {
-    this.$favoritesContent.on('click', '.btn-remove', (e: JQuery.TriggeredEvent) =>
+    this.$favoritesContent.on('click', '.product-card__remove-button', (e: JQuery.TriggeredEvent) =>
       this.handleRemoveProduct(e as JQuery.ClickEvent)
     );
     this.$favoritesContent.on('click', '[data-gtm="add-to-cart"]', (e: JQuery.TriggeredEvent) =>
@@ -61,12 +51,8 @@ class FavoritesManager {
     );
     initializeSizeSelectInteractions(this.$favoritesContent);
 
-    $('.favorites-back').on('click', () => {
-      if (window.history.length > 1) {
-        window.history.back();
-      } else {
-        window.location.assign('/');
-      }
+    $(SELECTORS.BACK_BUTTON).on('click', () => {
+      DOMUtils.handleBackNavigation();
     });
   }
 
@@ -79,7 +65,7 @@ class FavoritesManager {
     const productsHtml = renderFavoritesGrid(this.products);
     this.$favoritesContent.html(productsHtml);
 
-    this.$favoritesContent.find('.size-select select').each((_, element) => {
+    this.$favoritesContent.find(SELECTORS.SIZE_SELECT).each((_, element) => {
       updateSizeSelectState($(element));
     });
   }
@@ -87,62 +73,51 @@ class FavoritesManager {
   private handleRemoveProduct(event: JQuery.ClickEvent): void {
     event.preventDefault();
     const $button = $(event.currentTarget);
-    const productId = parseInt($button.data('product-id') as string);
+    const productId = DOMUtils.getProductIdFromElement($button);
     const productTitle = this.findProductById(productId)?.title || 'Товар';
 
     this.products = this.products.filter(product => product.id !== productId);
+    DOMUtils.updateCounter(SELECTORS.FAVORITES_COUNT, this.products.length);
 
-    $('#favoritesCount').text(this.products.length.toString());
-
-    const $productCard = $button.closest('.product-card');
-    $productCard.fadeOut(300, () => {
-      $productCard.remove();
-
+    const $productCard = $button.closest(SELECTORS.PRODUCT_CARD);
+    DOMUtils.fadeOutAndRemove($productCard, TIMING_CONFIG.FADE_OUT_DURATION, () => {
       if (this.products.length === 0) {
         this.$favoritesContent.html(renderEmptyState());
       }
     });
 
-    console.info(`Товар "${productTitle}" (ID: ${productId}) удален из избранного`);
+    ErrorHandler.logInfo(`Товар "${productTitle}" (ID: ${productId}) удален из избранного`);
   }
 
   private handleAddToCart(event: JQuery.ClickEvent): void {
     event.preventDefault();
     const $button = $(event.currentTarget);
-    const productId = parseInt($button.data('product-id') as string);
+    const productId = DOMUtils.getProductIdFromElement($button);
     const product = this.findProductById(productId);
 
     if (!product) return;
 
-    const $sizeSelectWrapper = $button.closest('.card-body').find('.size-select');
+    const $sizeSelectWrapper = $button
+      .closest('.product-card__body')
+      .find(SELECTORS.SIZE_SELECT_WRAPPER);
     const $sizeSelect = $sizeSelectWrapper.find('select');
     const selectedSizeValue = $sizeSelect.val() as string | null;
 
-    if (!selectedSizeValue) {
-      markSizeSelectInvalid($sizeSelectWrapper);
-      return;
-    }
+    const validation = SizeValidator.validateSizeSelection(product, selectedSizeValue);
 
-    const sizeInfo = product.sizes.find(size => size.value === selectedSizeValue);
-
-    if (!sizeInfo || !sizeInfo.available) {
+    if (!validation.isValid) {
       markSizeSelectInvalid($sizeSelectWrapper);
-      console.info(`Размер ${selectedSizeValue} недоступен для товара ${product.title}`);
+      if (validation.message) {
+        ErrorHandler.logInfo(validation.message);
+      }
       return;
     }
 
     updateSizeSelectState($sizeSelect);
+    DOMUtils.showTemporaryMessage($button, 'Добавлено ✓', TIMING_CONFIG.BUTTON_RESET_DELAY);
+    DOMUtils.incrementCounter(SELECTORS.CART_COUNT);
 
-    $button.prop('disabled', true).text('Добавлено ✓');
-    setTimeout(() => {
-      $button.prop('disabled', false).text('В корзину');
-    }, 2000);
-
-    const $cartCount = $('#cartCount');
-    const currentCount = parseInt($cartCount.text() as string, 10) || 0;
-    $cartCount.text((currentCount + 1).toString());
-
-    console.info(
+    ErrorHandler.logInfo(
       `Товар "${product.title}" (ID: ${product.id}, размер: ${selectedSizeValue}) добавлен в корзину`
     );
   }

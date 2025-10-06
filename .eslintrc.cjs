@@ -24,6 +24,7 @@ module.exports = {
     browser: true,
     es2021: true,
     jquery: true,
+    node: true,
   },
   parserOptions: {
     ecmaVersion: 2021,
@@ -35,4 +36,16 @@ module.exports = {
     'no-unused-vars': 'off',
     '@typescript-eslint/no-unused-vars': ['error'],
   },
+  overrides: [
+    {
+      files: ['.eslintrc.cjs', 'webpack.config.js', 'gulpfile.js'],
+      env: {
+        node: true,
+      },
+      rules: {
+        '@typescript-eslint/no-require-imports': 'off',
+        '@typescript-eslint/no-unused-vars': 'off',
+      },
+    },
+  ],
 };

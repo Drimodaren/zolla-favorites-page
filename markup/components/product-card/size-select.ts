@@ -1,6 +1,6 @@
 import $ from 'jquery';
 
-const WRAPPER_SELECTOR = '.size-select';
+const WRAPPER_SELECTOR = '.product-card__size-select';
 const DROPDOWN_ITEM_SELECTOR = '.dropdown-item';
 const DROPDOWN_BUTTON_SELECTOR = '.btn-dropdown';
 
@@ -42,11 +42,11 @@ export const updateSizeSelectState = ($select: JQuery): void => {
   $wrapper.find('.form-select__placeholder').text(String(selectedTextValue).trim());
 
   if (hasValue) {
-    $wrapper.addClass('size-select--filled');
+    $wrapper.addClass('product-card__size-select--filled');
     $button.addClass('btn-dropdown--filled');
     resetDropdownItems($wrapper, $select.val() as string);
   } else {
-    $wrapper.removeClass('size-select--filled');
+    $wrapper.removeClass('product-card__size-select--filled');
     $button.removeClass('btn-dropdown--filled');
     resetDropdownItems($wrapper, null);
   }

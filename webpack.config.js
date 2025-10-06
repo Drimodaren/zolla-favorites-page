@@ -4,7 +4,7 @@ module.exports = {
   mode: 'development',
   entry: {
     'personal/favorites': './markup/pages/personal/favorites.ts',
-    'index': './markup/index.ts',
+    index: './markup/index.ts',
   },
   output: {
     filename: '[name].js',

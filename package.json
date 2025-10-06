@@ -11,8 +11,7 @@
     "lint:js": "eslint --ext .ts markup/",
     "lint:css": "stylelint \"markup/**/*.scss\"",
     "lint": "npm run lint:js && npm run lint:css",
-    "prepare:gh-pages": "node scripts/prepare-gh-pages.js",
-    "deploy": "npm run build && npm run prepare:gh-pages",
+    "deploy": "echo 'ℹ️  Деплой выполняется автоматически через GitHub Actions при push в main'",
     "format": "prettier --write \"markup/**/*.{ts,scss,html}\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

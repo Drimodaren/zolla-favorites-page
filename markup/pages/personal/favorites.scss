@@ -82,6 +82,7 @@
 .favorites-grid {
   display: flex;
   flex-wrap: wrap;
+  gap: 1rem;
 }
 
 .loading {
@@ -114,6 +115,7 @@
 
   .favorites-grid {
     justify-content: space-between;
+    gap: 0;
   }
 
   .favorites-header {

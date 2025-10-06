@@ -58,8 +58,30 @@ class FavoritesManager {
     this.$favoritesContent.on('click', '[data-gtm="add-to-cart"]', (e: JQuery.TriggeredEvent) =>
       this.handleAddToCart(e as JQuery.ClickEvent)
     );
-    this.$favoritesContent.on('change', '.size-select .form-select', (e: JQuery.TriggeredEvent) => {
+    this.$favoritesContent.on('change', '.size-select select', (e: JQuery.TriggeredEvent) => {
       this.updateSizeSelectState($(e.currentTarget));
+    });
+
+    this.$favoritesContent.on('click', '.size-select .dropdown-item', (e: JQuery.TriggeredEvent) => {
+      const $item = $(e.currentTarget);
+      const isDisabled = $item.hasClass('disabled') || $item.attr('aria-disabled') === 'true';
+      if (isDisabled) {
+        e.preventDefault();
+        return;
+      }
+
+      const value = $item.data('value') as string;
+      const $select = $item.closest('.size-select').find('select');
+      $select.val(value).trigger('change');
+
+      const dropdownButton = $item.closest('.size-select').find('.btn-dropdown')[0];
+      if (dropdownButton && window.bootstrap?.Dropdown) {
+        const dropdownInstance = window.bootstrap.Dropdown.getOrCreateInstance(dropdownButton as Element);
+        dropdownInstance.hide();
+      }
+
+      $item.closest('.dropdown-menu').find('.dropdown-item').removeClass('active');
+      $item.addClass('active');
     });
 
     $(document).on('click', '[data-bs-target="#subscribeModal"]', (e: JQuery.TriggeredEvent) =>
@@ -85,7 +107,7 @@ class FavoritesManager {
     const productsHtml = renderFavoritesGrid(this.products);
     this.$favoritesContent.html(productsHtml);
 
-    this.$favoritesContent.find('.size-select .form-select').each((_, element) => {
+    this.$favoritesContent.find('.size-select select').each((_, element) => {
       this.updateSizeSelectState($(element));
     });
   }
@@ -120,20 +142,22 @@ class FavoritesManager {
 
     if (!product) return;
 
-    const $sizeSelect = $button.closest('.card-body').find('.form-select');
+    const $sizeSelectWrapper = $button.closest('.card-body').find('.size-select');
+    const $sizeSelect = $sizeSelectWrapper.find('select');
+    const $dropdownButton = $sizeSelectWrapper.find('.btn-dropdown');
     const selectedSizeValue = $sizeSelect.val() as string | null;
 
     if (!selectedSizeValue) {
-      $sizeSelect.addClass('is-invalid');
-      setTimeout(() => $sizeSelect.removeClass('is-invalid'), 2000);
+      $dropdownButton.addClass('is-invalid');
+      setTimeout(() => $dropdownButton.removeClass('is-invalid'), 2000);
       return;
     }
 
     const sizeInfo = product.sizes.find(size => size.value === selectedSizeValue);
 
     if (!sizeInfo || !sizeInfo.available) {
-      $sizeSelect.addClass('is-invalid');
-      setTimeout(() => $sizeSelect.removeClass('is-invalid'), 2000);
+      $dropdownButton.addClass('is-invalid');
+      setTimeout(() => $dropdownButton.removeClass('is-invalid'), 2000);
       console.info(`Размер ${selectedSizeValue} недоступен для товара ${product.title}`);
       return;
     }
@@ -234,11 +258,26 @@ class FavoritesManager {
   private updateSizeSelectState($select: JQuery): void {
     const hasValue = Boolean($select.val());
     const $wrapper = $select.closest('.size-select');
+    const $button = $wrapper.find('.btn-dropdown');
+    const placeholderText = ($button.data('placeholder') as string) || 'Размер';
+    const selectedText = hasValue
+      ? ($select.find('option:selected').text() || placeholderText)
+      : placeholderText;
+    $wrapper.find('.form-select__placeholder').text(selectedText.trim());
 
     if (hasValue) {
       $wrapper.addClass('size-select--filled');
+      $button.addClass('btn-dropdown--filled');
+      const selectedValue = $select.val() as string;
+      const $items = $wrapper.find('.dropdown-item');
+      $items.removeClass('active');
+      $items
+        .filter((_, element) => $(element).data('value') === selectedValue)
+        .addClass('active');
     } else {
       $wrapper.removeClass('size-select--filled');
+      $button.removeClass('btn-dropdown--filled');
+      $wrapper.find('.dropdown-item').removeClass('active');
     }
   }
 }

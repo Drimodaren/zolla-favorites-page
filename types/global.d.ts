@@ -79,6 +79,16 @@ declare global {
           show(): void;
         };
       };
+      Dropdown: {
+        getInstance(element: Element): {
+          hide(): void;
+          show(): void;
+        } | null;
+        getOrCreateInstance(element: Element): {
+          hide(): void;
+          show(): void;
+        };
+      };
     };
   }
 }

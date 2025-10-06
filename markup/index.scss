@@ -212,7 +212,7 @@ a {
   width: 100%;
   display: flex;
   gap: 2.5rem;
-  background: #fff;
+  background: $color-white;
   padding: 1.25rem 1.5rem;
 }
 
@@ -232,7 +232,7 @@ a {
   align-items: center;
   gap: 15px;
   text-decoration: none;
-  color: #8c8c8c;
+  color: $color-neutral-600;
   font-size: 13px;
   line-height: 20px;
   padding: 0.65rem 0.75rem;
@@ -403,24 +403,100 @@ a {
 
 .footer-links {
   display: grid;
-  grid-template-columns: repeat(5, minmax(120px, 1fr));
+  grid-template-columns: repeat(4, minmax(140px, 1fr)) minmax(320px, 1fr);
   gap: 2rem;
+  align-items: start;
+}
+
+.footer-accordion__header {
+  margin: 0;
+}
+
+.footer-accordion__button {
+  padding: 0;
+  background-color: transparent;
+  box-shadow: none;
+  border: none;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: $color-neutral-600;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  text-align: left;
+
+  &::after {
+    flex: 0 0 auto;
+    width: 24px;
+    height: 24px;
+    background-image: url('../../assets/images/accordion-plus.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 24px 24px;
+    content: '';
+    transform: none;
+  }
+
+  &:not(.collapsed)::after {
+    background-image: url('../../assets/images/accordion-minus.svg');
+  }
+
+  &:focus,
+  &:focus-visible,
+  &:active {
+    box-shadow: none;
+    outline: none;
+    background-color: transparent;
+  }
+
+  &:not(.collapsed) {
+    background-color: transparent;
+    color: inherit;
+    box-shadow: none;
+  }
+}
+
+.footer-accordion__collapse {
+  border: none;
+}
+
+.footer-accordion__body {
+  padding: 0;
+  margin-top: 0.75rem;
+}
+
+.footer-column__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
 .footer-column {
+  &.accordion-item {
+    border: none;
+    background: transparent;
+    border-radius: 0;
+    padding: 0;
+
+    &:not(:first-of-type) {
+      border-top: none;
+      margin-top: 0;
+    }
+  }
+
   h3 {
     font-size: 0.95rem;
     font-weight: 600;
     margin-bottom: 1rem;
   }
 
-  ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
+  &.accordion-item h3 {
+    margin-bottom: 0;
   }
 
   a {
@@ -436,7 +512,7 @@ a {
   &--store {
     .app-links {
       display: flex;
-      gap: 1.5rem;
+      gap: 1.25rem;
       align-items: flex-start;
     }
 
@@ -455,7 +531,7 @@ a {
       display: flex;
       flex-direction: column;
       gap: 1rem;
-      max-width: 220px;
+      max-width: 176px;
     }
 
     .app-links__hint {
@@ -480,7 +556,6 @@ a {
 }
 
 .page-footer__bottom {
-  border-top: 1px solid $color-border;
   padding-top: 1.5rem;
   display: flex;
   align-items: center;
@@ -488,6 +563,11 @@ a {
   justify-content: space-between;
   font-size: 0.8rem;
   color: $color-secondary;
+}
+
+.page-footer__divider {
+  border-top: 1px solid $color-border;
+  margin-top: 1.5rem;
 }
 
 .footer-bottom-links {
@@ -519,7 +599,23 @@ a {
   }
 
   .footer-links {
-    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  }
+}
+
+@media (width >=769px) {
+  .footer-accordion__button {
+    pointer-events: none;
+
+    &::after {
+      display: none;
+    }
+  }
+
+  .footer-accordion__collapse {
+    display: block !important;
+    height: auto !important;
+    visibility: visible;
   }
 }
 
@@ -587,6 +683,16 @@ a {
   .page-footer__card {
     margin: 0 1rem;
     padding: 2rem 1.5rem 1.75rem;
+  }
+
+  .footer-links {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .footer-accordion__button {
+    color: $color-neutral-600;
   }
 
   .sidebar {

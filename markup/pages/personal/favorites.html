@@ -173,39 +173,119 @@
               </div>
             </div>
           </div>
-          <div class="footer-links">
-            <div class="footer-column">
-              <h3>Покупателям</h3>
-              <ul>
-                <li><a href="#">Оплата</a></li>
-                <li><a href="#">Доставка</a></li>
-                <li><a href="#">Возврат</a></li>
-                <li><a href="#">Вопросы и ответы</a></li>
-                <li><a href="#">Условия обслуживания</a></li>
-              </ul>
+          <div class="footer-links accordion" id="footerAccordion">
+            <div class="footer-column accordion-item">
+              <h3 class="footer-accordion__header accordion-header" id="footerHeadingCustomers">
+                <button
+                  class="accordion-button footer-accordion__button"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#footerCollapseCustomers"
+                  aria-expanded="true"
+                  aria-controls="footerCollapseCustomers"
+                >
+                  Покупателям
+                </button>
+              </h3>
+              <div
+                id="footerCollapseCustomers"
+                class="accordion-collapse collapse show footer-accordion__collapse"
+                data-bs-parent="#footerAccordion"
+                aria-labelledby="footerHeadingCustomers"
+              >
+                <div class="accordion-body footer-accordion__body">
+                  <ul class="footer-column__list">
+                    <li><a href="#">Оплата</a></li>
+                    <li><a href="#">Доставка</a></li>
+                    <li><a href="#">Возврат</a></li>
+                    <li><a href="#">Вопросы и ответы</a></li>
+                    <li><a href="#">Условия обслуживания</a></li>
+                  </ul>
+                </div>
+              </div>
             </div>
-            <div class="footer-column">
-              <h3>События</h3>
-              <ul>
-                <li><a href="#">Блог</a></li>
-                <li><a href="#">Лукбук</a></li>
-                <li><a href="#">Новости и акции</a></li>
-              </ul>
+            <div class="footer-column accordion-item">
+              <h3 class="footer-accordion__header accordion-header" id="footerHeadingEvents">
+                <button
+                  class="accordion-button collapsed footer-accordion__button"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#footerCollapseEvents"
+                  aria-expanded="false"
+                  aria-controls="footerCollapseEvents"
+                >
+                  События
+                </button>
+              </h3>
+              <div
+                id="footerCollapseEvents"
+                class="accordion-collapse collapse footer-accordion__collapse"
+                data-bs-parent="#footerAccordion"
+                aria-labelledby="footerHeadingEvents"
+              >
+                <div class="accordion-body footer-accordion__body">
+                  <ul class="footer-column__list">
+                    <li><a href="#">Блог</a></li>
+                    <li><a href="#">Лукбук</a></li>
+                    <li><a href="#">Новости и акции</a></li>
+                  </ul>
+                </div>
+              </div>
             </div>
-            <div class="footer-column">
-              <h3>О компании</h3>
-              <ul>
-                <li><a href="#">О бренде</a></li>
-                <li><a href="#">Команда</a></li>
-                <li><a href="#">Контакты</a></li>
-                <li><a href="#">Сотрудничество</a></li>
-              </ul>
+            <div class="footer-column accordion-item">
+              <h3 class="footer-accordion__header accordion-header" id="footerHeadingCompany">
+                <button
+                  class="accordion-button collapsed footer-accordion__button"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#footerCollapseCompany"
+                  aria-expanded="false"
+                  aria-controls="footerCollapseCompany"
+                >
+                  О компании
+                </button>
+              </h3>
+              <div
+                id="footerCollapseCompany"
+                class="accordion-collapse collapse footer-accordion__collapse"
+                data-bs-parent="#footerAccordion"
+                aria-labelledby="footerHeadingCompany"
+              >
+                <div class="accordion-body footer-accordion__body">
+                  <ul class="footer-column__list">
+                    <li><a href="#">О бренде</a></li>
+                    <li><a href="#">Команда</a></li>
+                    <li><a href="#">Контакты</a></li>
+                    <li><a href="#">Сотрудничество</a></li>
+                  </ul>
+                </div>
+              </div>
             </div>
-            <div class="footer-column">
-              <h3>Работа в компании</h3>
-              <ul>
-                <li><a href="#">Вакансии</a></li>
-              </ul>
+            <div class="footer-column accordion-item">
+              <h3 class="footer-accordion__header accordion-header" id="footerHeadingCareer">
+                <button
+                  class="accordion-button collapsed footer-accordion__button"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#footerCollapseCareer"
+                  aria-expanded="false"
+                  aria-controls="footerCollapseCareer"
+                >
+                  Работа в компании
+                </button>
+              </h3>
+              <div
+                id="footerCollapseCareer"
+                class="accordion-collapse collapse footer-accordion__collapse"
+                data-bs-parent="#footerAccordion"
+                aria-labelledby="footerHeadingCareer"
+              >
+                <div class="accordion-body footer-accordion__body">
+                  <ul class="footer-column__list">
+                    <li><a href="#">Вакансии</a></li>
+                  </ul>
+                </div>
+              </div>
             </div>
             <div class="footer-column footer-column--store">
               <h3>Скачивайте наше приложение</h3>
@@ -230,6 +310,7 @@
             </div>
           </div>
         </div>
+        <div class="page-footer__divider" aria-hidden="true"></div>
         <div class="page-footer__bottom">
           <span>2004–2023 © Zolla. Factor LLC</span>
           <div class="footer-bottom-links">

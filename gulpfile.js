@@ -13,24 +13,24 @@ const del = require('del');
 const paths = {
   html: {
     src: ['markup/pages/**/*.html', 'markup/*.html'],
-    dest: 'dist/'
+    dest: 'dist/',
   },
   scss: {
     src: 'markup/**/*.scss',
-    dest: 'dist/'
+    dest: 'dist/',
   },
   ts: {
     src: 'markup/**/*.ts',
-    dest: 'dist/js/'
+    dest: 'dist/js/',
   },
   json: {
     src: 'markup/mock/**/*.json',
-    dest: 'dist/mock/'
+    dest: 'dist/mock/',
   },
   assets: {
     src: 'markup/assets/**/*',
-    dest: 'dist/assets/'
-  }
+    dest: 'dist/assets/',
+  },
 };
 
 function clean() {
@@ -45,10 +45,7 @@ function copyPagesHtml() {
 }
 
 function copyRootHtml() {
-  return gulp
-    .src('markup/*.html')
-    .pipe(gulp.dest('dist/'))
-    .pipe(browserSync.stream());
+  return gulp.src('markup/*.html').pipe(gulp.dest('dist/')).pipe(browserSync.stream());
 }
 
 const html = parallel(copyPagesHtml, copyRootHtml);
@@ -71,17 +68,11 @@ function scripts() {
 }
 
 function json() {
-  return gulp
-    .src(paths.json.src)
-    .pipe(gulp.dest(paths.json.dest))
-    .pipe(browserSync.stream());
+  return gulp.src(paths.json.src).pipe(gulp.dest(paths.json.dest)).pipe(browserSync.stream());
 }
 
 function assets() {
-  return gulp
-    .src(paths.assets.src)
-    .pipe(gulp.dest(paths.assets.dest))
-    .pipe(browserSync.stream());
+  return gulp.src(paths.assets.src).pipe(gulp.dest(paths.assets.dest)).pipe(browserSync.stream());
 }
 
 function watchFiles() {
@@ -96,12 +87,12 @@ function serve() {
   browserSync.init({
     server: {
       baseDir: './dist',
-      index: 'index.html'
+      index: 'index.html',
     },
     startPath: '/pages/personal/favorites.html',
     port: 3000,
     open: true,
-    notify: false
+    notify: false,
   });
 
   watchFiles();

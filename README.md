@@ -81,3 +81,4 @@ gulpfile.js        пайплайн сборки
 
 ## Автор
 Разработка в рамках тестового задания. EOF
+# Test commit to trigger workflow
